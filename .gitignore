@@ -5,3 +5,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ignore rust build directory
+target
