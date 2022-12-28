@@ -1,0 +1,1 @@
+/Users/darioalessandro/Documents/rust-vs-java/rust-dangling-pointer-attempt/target/debug/rust-dangling-pointer-attempt: /Users/darioalessandro/Documents/rust-vs-java/rust-dangling-pointer-attempt/src/main.rs
