@@ -5,7 +5,7 @@ fn main() {
     // Create an unbounded MPMC channel.
     let (sender, receiver) = unbounded();
 
-    // Spawn a few producers.
+    // Spawn producer threads.
     for i in 0..5 {
         let sender = sender.clone();
         thread::spawn(move || {
@@ -13,7 +13,7 @@ fn main() {
         });
     }
 
-    // Spawn a few consumers.
+    // Spawn consumer threads.
     let mut handles = Vec::new();
     for _ in 0..5 {
         let receiver = receiver.clone();
@@ -24,6 +24,8 @@ fn main() {
     }
     // Wait for all threads to finish.
     for handle in handles {
-        handle.join().unwrap();
+        if let Err(e) = handle.join() {
+            println!("thread panicked: {:?}", e);
+        }
     }
 }

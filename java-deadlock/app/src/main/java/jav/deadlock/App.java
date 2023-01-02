@@ -5,9 +5,9 @@ package jav.deadlock;
 
 public class App {
 
-    static Object lock1 = new Object();
-    static Object lock2 = new Object();
     public static void main(String[] args) {
+        Object lock1 = new Object();
+        Object lock2 = new Object();
         var t1 = new Thread(new Runnable() {
             public void run() {
                 synchronized(lock1) {

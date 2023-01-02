@@ -6,27 +6,23 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class App {
     public static void main(String[] args) throws InterruptedException {
         // Create a concurrent linked queue to hold the messages
-        ConcurrentLinkedQueue<Integer> queue = new ConcurrentLinkedQueue<>();
-
-        // Create and start 5 producer threads
+        final var queue = new ConcurrentLinkedQueue<Integer>();
+        
+        // Spawn producer threads
         for (int i = 0; i < 5; i++) {
             final var acc = i;
             new Thread(() -> {
-                    // Add a message to the queue
                     queue.add(acc *2);
             }).start();
         }
-
-        // Create and start 5 consumer threads
+        // Spawn consumer threads
         var handles = new ArrayList<Thread>();
         for (int i = 0; i < 5; i++) {
             var thread = new Thread(() -> {
-                // Try to retrieve a message from the queue
                 while (true) {
-                    Integer message = queue.poll();
+                    var message = queue.poll();
                     if (message != null) {
-                        // If a message was retrieved, print it and exit
-                        System.out.println("Received value " + message);
+                        System.out.println("received value " + message);
                         return;
                     }
                 }
